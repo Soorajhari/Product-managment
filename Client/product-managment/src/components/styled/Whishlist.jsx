@@ -7,7 +7,7 @@ import star from "../../assets/rating.png"
 const Whishlist = () => {
   return (
     <div className=' font-[Ubuntu]'>
-<div className='bg-[#ffff] shadow-2xl w-[300px] h-screen'>
+<div className='bg-[#ffff] shadow-2xl w-[350px] h-screen'>
 <div className=''>
     <div className='bg-[#003F62] h-[80px] w-full relative'>
     <ion-icon class="absolute top-5 bg-white ml-6 w-[35px] h-[35px] rounded-full" name="heart-outline"></ion-icon>
@@ -15,7 +15,7 @@ const Whishlist = () => {
 
 </div>
 
-    <div className='flex mt-16'>
+    <div className='flex mt-16 ml-5'>
         <div>
             <img src={laptop} className='w-[110px] h-[120px] border border-black rounded-xl' alt="laptop" />
         </div>

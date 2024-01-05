@@ -17,5 +17,7 @@ Router.get("/get-subcategory",authController.getSubCategory)
 Router.get("/get-product",authController.getProduct)
 Router.post("/product",multer.array("file",3),productController.addProduct)
 Router.post("/search",authController.Search)
+Router.post("/edit-product",productController.updateProduct)
+Router.post("/single-product",productController.singleProduct)
 
 module.exports=Router

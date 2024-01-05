@@ -12,6 +12,9 @@ import Category from "./components/styled/Category";
 import Home from "./pages/Home";
 import Signup from "./components/styled/Signup";
 import Signin from "./components/styled/Signin";
+import Single from "./components/styled/Single";
+import Editproduct from "./components/styled/Editproduct";
+import Top from "./components/styled/Top";
 
 function App() {
   return (
@@ -21,12 +24,11 @@ function App() {
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Signin/>} />
           <Route path="/add-product" element={<Addproduct/>} />
-          {/* <Route path="/add-category" element={<Addcategory/>} /> */}
-          {/* <Route path="/add-subcategory" element={<Addsubcategory/>} /> */}
           <Route path="/whishlist" element={<Whishlist/>} />
-          {/* <Route path="/home" element={<Product/>} /> */}
           <Route path="/home" element={<Home/>} />
-          {/* <Route path="/category" element={<Category/>} /> */}
+          <Route path="/single/:id" element={<Top/>} />
+          <Route path="/edit" element={<Editproduct/>} />
+        
         </Routes>
       </Router>
     </div>

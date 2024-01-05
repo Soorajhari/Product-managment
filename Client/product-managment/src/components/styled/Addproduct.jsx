@@ -17,8 +17,8 @@ const Addproduct = () => {
   const { data } = useFetch("/get-subcategory");
 
   return (
-    <div className="flex font-[Ubuntu] justify-center items-center  2xl:min-h-screen ">
-      <div className="w-[600px] md:w-[650px] md:h-[680px]   h-auto mt-20 md:mt-10 2xl:mt-0 rounded-2xl   shadow-2xl ">
+    <div className="flex font-[Ubuntu] justify-center items-center   2xl:min-h-screen ">
+      <div className="w-[600px] md:w-[650px] md:h-[680px]    h-auto mt-20 md:mt-10 2xl:mt-0 rounded-2xl   shadow-2xl ">
         <div className="mx-auto text-center ">
           <h2 className="mt-16 text-3xl font-semibold ">Add Product</h2>
         </div>

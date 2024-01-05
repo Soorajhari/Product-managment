@@ -4,22 +4,30 @@ import Addsubcategory from "./Addsubcategory";
 import laptop from "../../assets/OKR0RO0-removebg-preview.png";
 import useProductfetch from "../../hooks/useProductfetch";
 import ReactPaginate from "react-paginate";
+import Addproduct from "./Addproduct";
+import { useNavigate } from "react-router-dom";
 
-const Product = () => {
+const Product = ({data}) => {
   const [isModal, setIsModal] = useState(false);
   const [subcategory, setSubCategory] = useState(false);
-  const {data} = useProductfetch();
+  const [product, setProduct] = useState(false);
+
   const [pageNumber, setPageNumber] = useState(0);
   const perPage = 2; 
   const [currentItems, setCurrentItems] = useState([]);
   const [itemOffset, setItemOffset] = useState(0);
 
+  const navigate=useNavigate()
+  console.log(data)
 
   const openModal = () => {
     setIsModal(true);
   };
   const openSubCategory = () => {
     setSubCategory(true);
+  };
+  const openProduct = () => {
+    setProduct(true);
   };
 
   useEffect(() => {
@@ -37,8 +45,10 @@ const Product = () => {
 
 
 
+
+
   return (
-    // <div className="">
+    <div className="">
     <div className="flex-col items-end">
       <div className="flex justify-end mt-10 gap-x-5 mr-10">
         <button
@@ -53,8 +63,8 @@ const Product = () => {
         >
           Add SubCategory
         </button>
-        <button className="p-2 bg-[#EDA415] w-[130px] h-[50px] rounded-2xl text-white text-lg">
-          Add Products
+        <button className="p-2 bg-[#EDA415] w-[130px] h-[50px] rounded-2xl text-white text-lg" onClick={openProduct}>
+          Add Products  
         </button>
       </div>
       <div className={`absolute z-10 left-[800px] `}>
@@ -62,6 +72,9 @@ const Product = () => {
       </div>
       <div className={`absolute z-10 left-[800px] `}>
         {subcategory && <Addsubcategory />}
+      </div>
+      <div className={`absolute z-[999] left-[800px] `}>
+        {product && <Addproduct />}
       </div>
 
       <div className="flex gap-x-10 flex-wrap mt-12 mr-12 ">
@@ -72,13 +85,14 @@ const Product = () => {
     <div key={index}>
       <div className="flex justify-center">
         <img
-          src={`http://localhost:4000/images/${item.imagePath}`}
-          className="w-[150px] h-[120px] object-cover"
+          src={`http://localhost:4000/images/${item.imagePath}`} onClick={()=>navigate(`/single/${item._id}`)}
+          className="w-[150px] h-[120px] object-cover cursor-pointer"
           alt="laptop"
         />
         <ion-icon
           class="mt-6 text-xl bg-blue-300 rounded-full w-[40px] h-[40px] flex justify-center items-center"
-          name="heart-outline"
+          name="heart-outline" 
+        //   onClick={}
         ></ion-icon>
       </div>
 
@@ -114,6 +128,7 @@ const Product = () => {
         </p>
       </div>
       {/* </>     */}
+    </div>
     </div>
   );
 };
