@@ -5,7 +5,7 @@ import instance from "../../axios/axios";
 const Addsubcategory = () => {
     const[value,setValue]=useState("")
     const [selectedValue, setSelectedValue] = useState('');
-  const { data } = useFetch();
+  const { data } = useFetch("/get-category");
   console.log(data);
 
   const handleSubmit= async (e)=>{

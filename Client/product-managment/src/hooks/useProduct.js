@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import instance from "../axios/axios";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const useProduct = (initialValues) => {
   const [values, setValues] = useState(initialValues);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const navigate=useNavigate()
 
   const[error,setError]=useState("")
 
@@ -16,49 +19,59 @@ const useProduct = (initialValues) => {
       };
     });
   };
-  const formData = new FormData();
+
   const handleFileChange = (e) => {
     const files = e.target.files;
     const selected = Array.from(files).slice(0, 3); 
     setSelectedFiles((prevFiles) => [...prevFiles, ...selected])
-    selected.forEach((file, index) => {
-      formData.append(`file-${index}`, file);
-    });
+;
   };
 
   console.log(values);
 
   const handleSubmit = async (e,product) => {
     e.preventDefault();
-    const body = {
-      title: values.title,
-      ram: values.ram,
-      price: values.price,
-      total: values.total,
-      subcategory: values.subcategory,
-      description: values.description,
-      category: values.category,
-      formData:FormData
-    };
-    console.log(body);
+    const formData = new FormData();
+
+   
+    formData.append('title', values.title);
+    formData.append('ram', values.ram);
+    formData.append('price', values.price);
+    formData.append('total', values.total);
+    formData.append('subcategory', values.subcategory);
+    formData.append('description', values.description);
+    formData.append('category', values.category);
+  
+  
+    selectedFiles.forEach((file, index) => {
+      console.log(`File ${index}:`, file);
+      formData.append(`file`, file);
+    });
+    console.log(formData);
     if (isNaN(values.ram) || isNaN(values.price) || isNaN(values.total) || values.ram <= 0 || values.price <= 0 || values.total <= 0) {
       setError('value must be numeric and greater than zero.');
       return; 
     }
     try {
-      if (error=="") {
-        const response = await instance.post(
-          "/product",
-          body
+      // if (error=="") {
+        const response = await axios.post(
+          "http://localhost:4000/product",
+          formData,
+         
         );
         console.log(response.data);
-      }
+        resetForm()
+        navigate("/home")
+      // }
       // resetForm();
       // showToast(`${formType?.toUpperCase()} SUCESS`, "success");
     } catch (err) {
       setError(err?.data?.message, "error");
     }
     // }
+  };
+  const resetForm = () => {
+    setValues(initialValues);
   };
 
   return {

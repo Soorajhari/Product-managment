@@ -19,12 +19,12 @@ export const useValidate=()=>{
     
     
         if (formType === "signup") {
-          if (user.name.length < 5) {
-            newErrors.name = "Name must be at least 5 characters";
+          if (user.userName.length < 4) {
+            newErrors.name = "Name must be at least 4 characters";
             isValid = false;
           }
     
-          if (/\d/.test(user.name)) {
+          if (/\d/.test(user.userName)) {
             newErrors.name = "Name must not include numbers";
             isValid = false;
           }
@@ -35,11 +35,11 @@ export const useValidate=()=>{
           isValid = false;
         }
     
-        if (!pswrdRegex.test(user.password) || !pswrdRule.test(user.password)) {
-          newErrors.password =
-            "Password must include a character and a special character";
-          isValid = false;
-        }
+        // if (!pswrdRegex.test(user.password) || !pswrdRule.test(user.password)) {
+        //   newErrors.password =
+        //     "Password must include a character and a special character";
+        //   isValid = false;
+        // }
     
         if (user.password.length < 6) {
           newErrors.password = "Password must be at least 6 characters";

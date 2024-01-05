@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import instance from "../axios/axios";
 
-const useFetch = () => {
+const useFetch = (url) => {
   const [data, setData] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
 
   const fetchData = async () => {
     try {
-      const response = await instance.get("/get-category");
+      const response = await instance.get(url);
       console.log(response);
       setData(response.data.data)
     } catch (error) {

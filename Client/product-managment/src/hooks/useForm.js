@@ -10,12 +10,12 @@ import { showToast } from "../functions/notification";
 import instance from "../axios/axios";
 
  const useForm = (initialValues) => {
-  // const dispatch = useDispatch();
+
  
   const [values, setValues] = useState(initialValues);
   const { errors, validate, clearError } = useValidate();
-//  const navigate = useNavigate();
-  // const { signin, signup } = useAuth();
+ const navigate = useNavigate();
+//  const dispatch = useDispatch();
 
   console.log(values)
 
@@ -39,27 +39,48 @@ import instance from "../axios/axios";
      password:values.password
 
     }
-    console.log(body)
+    
+   
 
-    // if (valid) {
+    if (valid) {
       try {
-      if(formType=="signup"){
-        const response=await axios.post("http://localhost:4000/signup",body)
-        console.log( response.data)
-      }
-        // resetForm();
-        showToast(`${formType?.toUpperCase()} SUCESS`, "success");
+        if (formType === "signup") {
+          try {
+            const response = await axios.post("http://localhost:4000/signup", body);
+            console.log(response.data);
+        
+            if (response.data.status === "ok") {
+              navigate("/login");
+            } else {
+           
+            }
+          } catch (error) {
+           
+          }
+        } else {
+          try {
+            const loginResponse = await axios.post("http://localhost:4000/login", body);
+            console.log(loginResponse.data);
+        
+           
+          } catch (error) {
+           
+          }
+        }
+        
+      resetForm()
+     
       } catch (err) {
         showToast(err?.data?.message, "error");
       }
-    // }
+    }
   };
 
-  // const resetForm = () => {
-  //   setValues(initialValues);
-  // };
+  const resetForm = () => {
+    setValues(initialValues);
+  };
 
-  return { values, handleChange, handleSubmit };
+  return { values, handleChange, handleSubmit ,errors};
 };
 
 export default useForm;
