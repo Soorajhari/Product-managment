@@ -22,16 +22,16 @@ const Product = () => {
     setSubCategory(true);
   };
 
-//   useEffect(() => {
-//     setPageNumber(Math.ceil(data.length / perPage));
-//     setCurrentItems(data.slice(itemOffset, itemOffset + perPage));
-//   }, [itemOffset, perPage, data]);
+  useEffect(() => {
+    setPageNumber(Math.ceil(data.length / perPage));
+    setCurrentItems(data.slice(itemOffset, itemOffset + perPage));
+  }, [itemOffset, perPage, data]);
      
 
-//   const handlePageClick = (event) => {
-//     const newOffset = event.selected * perPage;
-//     setItemOffset(newOffset);
-//   };
+  const handlePageClick = (event) => {
+    const newOffset = event.selected * perPage;
+    setItemOffset(newOffset);
+  };
   
 
 
@@ -65,7 +65,7 @@ const Product = () => {
       </div>
 
       <div className="flex gap-x-10 flex-wrap mt-12 mr-12 ">
-      {data.map((item, index) => (
+      {currentItems.map((item, index) => (
         <div className="flex  ">
         <div className="border border-black w-[300px] h-[230px] rounded-xl overflow-hidden">
 
@@ -103,11 +103,11 @@ const Product = () => {
       </div>
       <div className="flex gap-x-4 justify-between mt-10 mr-12">
         <p className="text-base text-gray-500">10 of 456 items</p>
-        {/* <ReactPaginate 
+        <ReactPaginate 
         pageCount={pageNumber} 
         onPageChange={handlePageClick} breakLabel="..." nextLabel="next >" pageRangeDisplayed={3} 
         previousLabel="< Previous" renderOnZeroPageCount={null} containerClassName="pagination"
-        pageLinkClassName="page-cum" previousLinkClassName="page-cum" nextLinkClassName="page-cum" activeLinkClassName="active"/> */}
+        pageLinkClassName="page-cum" previousLinkClassName="page-cum" nextLinkClassName="page-cum" activeLinkClassName="active"/>
         
         <p>
           Show <span className="text-yellow-600">10 rows</span>
