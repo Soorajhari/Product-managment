@@ -5,22 +5,21 @@ import Category from "../components/styled/Category";
 import useProductfetch from "../hooks/useProductfetch";
 
 
-const Home = () => {
-  const { handleSearch, handleSearchSubmit, data, handleCheckboxChange } =
+const Landing = () => {
+  const {  data,  } =
     useProductfetch();
 
   return (
     <div className={`relative`}>
       <Nav
-        handleSearch={handleSearch}
-        handleSearchSubmit={handleSearchSubmit}
+      
       />
       <div className="flex gap-x-44">
-        <Category handleCheckboxChange={handleCheckboxChange} />
+        <Category  />
         <Product data={data} />
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Landing

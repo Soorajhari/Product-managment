@@ -5,6 +5,7 @@ import {fetchProductsStart,fetchProductsSuccess,fetchProductsFailure} from '../r
 
 const useWhishlist = () => {
     const [details,setDetails]=useState()
+    const [error,setError]=useState()
     const dispatch=useDispatch()
 
 
@@ -16,8 +17,13 @@ const useWhishlist = () => {
         try {
           const response = await instance.post("/whishlist",body);
           console.log(response.data)
-          setDetails(response.data.whishlist)
-          dispatch(fetchProductsSuccess(response.data.whishlist))
+          if(response.data.status=="ok"){
+            setDetails(response.data.whishlist)
+            dispatch(fetchProductsSuccess(response.data.whishlist))
+          }else{
+            setError(response.data.message);
+          }
+         
         } catch (error) {
           setError(error.message);
         }
@@ -28,7 +34,7 @@ const useWhishlist = () => {
       }, []);
 
   return {
-   handleWhishlist,details
+   handleWhishlist,details,error
 }
 }
 

@@ -4,7 +4,6 @@ import instance from "../../axios/axios";
 const Addcategory = (props) => {
   const [category, setCategory] = useState("");
 
-  console.log(category);
   const handleAdd = async (e) => {
     e.preventDefault();
     const body = {

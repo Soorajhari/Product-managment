@@ -57,23 +57,6 @@ const useProductfetch = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const handleSearch = (values) => {
     setSearch(values);
   };

@@ -4,7 +4,7 @@ import { getProduct } from "../../functions/getProduct";
 import useProduct from "../../hooks/useProduct";
 import useFetch from "../../hooks/useFetch";
 
-const Addproduct = () => {
+const Addproduct = (props) => {
   const productData = getProduct();
   const {
     handleSubmit,
@@ -14,6 +14,12 @@ const Addproduct = () => {
     error,
     selectedFiles,
   } = useProduct(productData);
+
+  const handleClose = (e) => {
+    e.preventDefault();
+    props.setProduct(false);
+  };
+
   const { data } = useFetch("/get-subcategory");
 
   return (

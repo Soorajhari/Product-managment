@@ -45,20 +45,20 @@ const Single = ({whishlist}) => {
       {/* {product.map((item,index)=>( */}
         <div >
         <div className="border border-black w-[600px] flex justify-center items-center">
-          <img src=  {`http://localhost:4000/images/${product?product.imagePath:""}`} alt="" />
+          <img src=  {`http://localhost:4000/images/${product?product.imagePath[0]:""}`} alt="" />
         </div>
         <div className="flex gap-x-5 w-[600px] mt-4 ">
           <div className="border border-black">
             <img
               className="w-[280px] h-[200px] object-cover"
-              src={`http://localhost:4000/images/${product?product.imagePath:""}`}
+              src={`http://localhost:4000/images/${product?product.imagePath[0]:""}`}
               alt=""
             />
           </div>
           <div className="border border-black">
             <img
               className="w-[280px] h-[200px] object-cover"
-              src={`http://localhost:4000/images/${product?product.imagePath:""}`}
+              src={`http://localhost:4000/images/${product?product.imagePath[0]:""}`}
               alt=""
             />
           </div>

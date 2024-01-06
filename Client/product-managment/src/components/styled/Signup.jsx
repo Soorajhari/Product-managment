@@ -4,7 +4,7 @@ import Form from '../shared/Form'
 const Signup = () => {
   return (
     <div>
-        <Form formType="signup"/>
+      <Form formType="signup"/>
 
     </div>
   )

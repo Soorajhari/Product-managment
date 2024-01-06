@@ -4,32 +4,29 @@ import star from "../../assets/rating.png";
 import { useSelector } from "react-redux";
 import useWhishlist from "../../hooks/useWhishlist";
 import instance from "../../axios/axios";
-import {fetchProductsSuccess} from "../../redux/whishDetails"
+import { fetchProductsSuccess } from "../../redux/whishDetails";
 import { useDispatch } from "react-redux";
+import Error from "./Error";
 
 const Whishlist = () => {
-    const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const { products } = useSelector((state) => state.product);
   console.log(products);
-  const {details}=useWhishlist()
+  const {error}=useWhishlist()
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await instance.post("/get-whishlist");
         console.log(response);
         if (response.data.status === "ok") {
-            dispatch(fetchProductsSuccess(response.data.data))
-         
-        
+          dispatch(fetchProductsSuccess(response.data.data));
         }
       } catch (error) {
         console.log(error.message);
       }
     };
-  
-    fetchData(); 
-  
-  
+
+    fetchData();
   }, []);
 
   return (
@@ -43,33 +40,30 @@ const Whishlist = () => {
             ></ion-icon>
           </div>
         </div>
-        {products.map((item,index)=>
+        {products.map((item, index) => (
           <div className="flex mt-16 ml-5">
-          <div key={index}>
-            <img
-              src={`http://localhost:4000/images/${item.imagePath}`}
-              className="w-[110px] h-[120px] border border-black rounded-xl"
-              alt="laptop"
-            />
-          </div>
-          <div className="ml-4">
-            <p>{products?products.title:""}</p>
-            <div className="flex justify-between mt-2">
-              <p className="">$11.70</p>
-              <ion-icon
-                class="border border-black"
-                name="close-outline"
-              ></ion-icon>
+            <div key={index}>
+              <img
+                src={`http://localhost:4000/images/${item.imagePath}`}
+                className="w-[110px] h-[120px] border border-black rounded-xl"
+                alt="laptop"
+              />
             </div>
-            <div className="mb-4">
-              <img className="w-[90px] h-[90px] " src={star} alt="review" />
+            <div className="ml-4">
+              <p>{products ? products.title : ""}</p>
+              <div className="flex justify-between mt-2">
+                <p className="">$11.70</p>
+                <ion-icon
+                  class="border border-black"
+                  name="close-outline"
+                ></ion-icon>
+              </div>
+              <div className="mb-4">
+                <img className="w-[90px] h-[90px] " src={star} alt="review" />
+              </div>
             </div>
           </div>
-        </div>
-
-        )}
-
-      
+        ))}
       </div>
     </div>
   );

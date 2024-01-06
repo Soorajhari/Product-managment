@@ -10,7 +10,7 @@ const Form = (props) => {
     values: user,
     handleChange,
     handleSubmit,
-    errors,
+    errors,error
   } = useForm(formData);
 
   return (
@@ -78,7 +78,7 @@ const Form = (props) => {
               </div>
               </>
             )}
-            <>
+            <> <p className="text-red-500 text-base  text-center ml-4 font-thin my-3"> {error?error:""} </p>
             <div className="flex flex-col items-center md:flex-row justify-center gap-x-6  ">
                 <div className="bg-[#ECF8F9] w-60  max-w-xs p-2 flex items-center mt-6 md:mt-10 shadow-lg ">
                   <FaRegEnvelope className="text-gray-400 m-2" />
@@ -94,12 +94,14 @@ const Form = (props) => {
                 </div>
             </div>
             <div>
-             <p>{errors.email}</p>
+            {props.formType === "signup" && <p>{errors.email}</p>}
             </div>
             </>
          <></>
+         
             <div className="flex flex-col items-center md:flex-row justify-center gap-x-6  ">
               <div>
+             
                 <div className="bg-[#ECF8F9] w-60  max-w-xs p-2 flex items-center  mt-6 md:mt-10 shadow-lg ">
                   <FaRegEnvelope className="text-gray-400 m-2" />
                   <input
@@ -114,7 +116,7 @@ const Form = (props) => {
               </div>
             </div>
             <div>
-            <p>{errors.password}</p>
+            {props.formType === "signup" && <p>{errors.password}</p>}
             </div>
             <div className="flex justify-center mt-10 ml-10">
               <button
