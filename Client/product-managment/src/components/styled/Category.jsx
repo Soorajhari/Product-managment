@@ -2,7 +2,7 @@ import React ,{useEffect, useState}from "react";
 import useFetch from "../../hooks/useFetch";
 import useProductfetch from "../../hooks/useProductfetch";
 
-const Category = () => {
+const Category = ({ handleCheckboxChange}) => {
     const [expandedItems, setExpandedItems] = useState({});
     const { data } = useFetch("/get-subcategory");
 
@@ -13,7 +13,12 @@ const Category = () => {
       }));
     };
 
-  
+   
+
+//     useEffect(()=>{
+//       setData(filterData)
+//     },[selectedSubcategories])
+//    console.log(setData)
   return (
     <div className="ml-10 mt-6">
       <div className="flex gap-x-8">
@@ -34,7 +39,7 @@ const Category = () => {
             {expandedItems[index] &&
               item.subcategories.map((subItem, subIndex) => (
                 <div className="flex gap-x-4">
-                <input type="checkbox" id="myCheckbox" name="myCheckbox" value="checkboxValue"  ></input>
+                <input type="checkbox" id="myCheckbox" name="myCheckbox" value="checkboxValue" onChange={(e)=>handleCheckboxChange(e.target.checked, subItem.name)} ></input>
                 <li className="font-light" key={subIndex}>
                   {subItem.name}
                 </li>

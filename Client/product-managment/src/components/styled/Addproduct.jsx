@@ -17,8 +17,8 @@ const Addproduct = () => {
   const { data } = useFetch("/get-subcategory");
 
   return (
-    <div className="flex font-[Ubuntu] justify-center items-center   2xl:min-h-screen ">
-      <div className="w-[600px] md:w-[650px] md:h-[680px]    h-auto mt-20 md:mt-10 2xl:mt-0 rounded-2xl   shadow-2xl ">
+    <div className="flex font-[Ubuntu] justify-center items-center    2xl:min-h-screen ">
+      <div className="w-[600px] md:w-[650px] md:h-[680px] bg-[#EEF0E5]    h-auto mt-20 md:mt-10 2xl:mt-0 rounded-2xl   shadow-2xl ">
         <div className="mx-auto text-center ">
           <h2 className="mt-16 text-3xl font-semibold ">Add Product</h2>
         </div>
@@ -88,9 +88,11 @@ const Addproduct = () => {
                   onChange={(e) => handleChange(e)}
                   required
                 >
+                     <option value="" disabled selected>
+                  Choose a subcategory
+                </option>
                   {data.map((item) => (
                     <React.Fragment key={item.id}>
-                     
                       {item.subcategories.map((subItem, subIndex) => (
                         <option key={subIndex} value={subItem.name}>
                           {subItem.name}
@@ -126,19 +128,18 @@ const Addproduct = () => {
               <select
                 name="category"
                 value={product.category}
-                id=""
-                className=" text-lg ml-10 w-[400px] h-[40px] rounded-lg border border-gray-400"
+                className="text-lg ml-10 w-[400px] h-[40px] rounded-lg border border-gray-400"
                 onChange={(e) => handleChange(e)}
                 required
               >
-                {data.map((item,index) => (
-                    <React.Fragment key={item.id}>
-                        <option key={index} value={item.category}>
-                          {item.category}
-                        </option>
-                     
-                    </React.Fragment>
-                  ))}
+                <option value="" disabled selected>
+                  Choose a category
+                </option>
+                {data.map((item, index) => (
+                  <option key={index} value={item.category}>
+                    {item.category}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

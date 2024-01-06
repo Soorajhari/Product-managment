@@ -32,7 +32,7 @@ const Addcategory = (props) => {
 
   return (
     <div className="flex font-[Ubuntu] justify-center items-center  2xl:min-h-screen">
-      <div className="w-[370px] bg-[#ffff] h-[230px] mt-20 md:mt-10 2xl:mt-0 rounded-2xl shadow-2xl">
+      <div className="w-[370px] bg-[#EEF0E5]  h-[230px] mt-20 md:mt-10 2xl:mt-0 rounded-2xl shadow-2xl">
         <div className="mx-auto text-center">
           <h2 className="mt-10 text-3xl font-semibold">Add Category</h2>
         </div>

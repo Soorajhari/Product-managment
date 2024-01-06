@@ -1,4 +1,6 @@
+
 const productModel = require("../model/product");
+const whishlistModel=require("../model/whishlist")
 
 const addProduct = async (req, res) => {
   try {
@@ -70,4 +72,68 @@ const updateProduct = async (req, res) => {
     }
   };
 
-module.exports = { addProduct, singleProduct ,updateProduct};
+
+  const whsihList = async (req, res) => {
+    try {
+      const id = req.body.id;
+      console.log(id);
+      if (!id) {
+        res.json({ status: "error", message: "id not found" });
+      }
+      const whishlistData = await productModel.findOne({ _id: id });
+      const title=whishlistData.title
+      const ram=whishlistData.ram
+      const price=whishlistData.price
+      const imagePath = whishlistData.imagePath[0];
+
+      console.log(whishlistData);
+       const whishlist=new whishlistModel({
+        title,
+        ram, price,imagePath
+       })
+        await whishlist.save()
+
+  console.log(whishlist)
+      res.json({ status: "ok", whishlist: whishlist});
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({ error: error.message });
+    }
+  };
+
+
+  const filterProducts = async (req, res) => {
+    try {
+      const filters = req.body.categories.map((category) => new RegExp(category, "i"));
+      const searchedProducts = await productModel.find({ subcategory: { $in: filters } }).exec();
+      res.json({ status: "ok", filterData: searchedProducts });
+    } catch (error) {
+      console.log(error.message);
+      res.json({ status: "error", message: "error occurred" });
+    }
+  };
+  
+
+const getWhishlist=async (req,res)=>{
+    try{
+ const whishlistData= await whishlistModel.find()
+ console.log(whishlistData)
+ res.json({status:"ok",data:whishlistData})
+    }catch(error){
+        console.log(error.message) 
+    }
+
+}
+
+
+
+
+
+
+
+
+
+  
+
+
+module.exports = { addProduct, singleProduct ,updateProduct,whsihList,filterProducts,getWhishlist};

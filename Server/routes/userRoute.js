@@ -19,5 +19,8 @@ Router.post("/product",multer.array("file",3),productController.addProduct)
 Router.post("/search",authController.Search)
 Router.post("/edit-product",productController.updateProduct)
 Router.post("/single-product",productController.singleProduct)
+Router.post("/whishlist",productController.whsihList)
+Router.post("/filter",productController.filterProducts)
+Router.post("/get-whishlist",productController.getWhishlist)
 
 module.exports=Router

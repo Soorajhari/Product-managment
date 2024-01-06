@@ -7,6 +7,7 @@ const useProductfetch = () => {
 //   const[product,setProduct]=useState(null)
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
+  const [selectedSubcategories, setSelectedSubcategories] = useState([]);
   const navigate=useNavigate()
 
   const fetchProductData = async () => {
@@ -25,31 +26,54 @@ const useProductfetch = () => {
   const body = {
     search,
   };
-  // useEffect(() => {
-  //     const fetchDataBasedOnSearch = async () => {
+  const handleCheckboxChange = (isChecked, subCategoryName) => {
+    let updatedCategories;
+    if (isChecked) {
+      updatedCategories = [...selectedSubcategories, subCategoryName];
+    } else {
+      updatedCategories = selectedSubcategories.filter((category) => category !== subCategoryName);
+    }
+    setSelectedSubcategories(updatedCategories);
+    filterItems(updatedCategories); // Call filterItems with the updated categories
+  };;
 
-  //     };
+//   console.log(selectedSubcategories)
+  const filterItems = async(categories) => {
+    console.log(categories)
+    const body={
+        categories
+    }
+    try{
+        const response= await instance.post("/filter",body)
+        console.log(response.data)
+        setData(response.data.filterData
+            )
+    }catch(error){
+        console.log(error.message)
+    }
+   
+  };
 
-  //     fetchDataBasedOnSearch();
-  //   }, [search])
 
-//   const handleSingle = async (e, id) => {
-//     e.preventDefault();
-//     const body = {
-//       id,
-//     };
-//     try {
-//       const response = await instance.post("/single-product", body);
-//       console.log(response);
-//     //   if(response.data.status=="ok"){
-//         await setProduct(response.data.Product)
-//         navigate("/single")
-//     //   }
-//     } catch (error) {
-//       console.log(error.message);
-//     }
-//   };
-// console.log(product)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const handleSearch = (values) => {
     setSearch(values);
   };
@@ -69,7 +93,7 @@ const useProductfetch = () => {
     data,
     error,
     handleSearch,
-    handleSearchSubmit,
+    handleSearchSubmit,handleCheckboxChange,filterItems
   
   };
 };

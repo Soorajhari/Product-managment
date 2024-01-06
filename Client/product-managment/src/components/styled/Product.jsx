@@ -6,6 +6,7 @@ import useProductfetch from "../../hooks/useProductfetch";
 import ReactPaginate from "react-paginate";
 import Addproduct from "./Addproduct";
 import { useNavigate } from "react-router-dom";
+import useWhishlist from "../../hooks/useWhishlist";
 
 const Product = ({data}) => {
   const [isModal, setIsModal] = useState(false);
@@ -16,6 +17,8 @@ const Product = ({data}) => {
   const perPage = 2; 
   const [currentItems, setCurrentItems] = useState([]);
   const [itemOffset, setItemOffset] = useState(0);
+
+  const {handleWhishlist}=useWhishlist()
 
   const navigate=useNavigate()
   console.log(data)
@@ -41,12 +44,6 @@ const Product = ({data}) => {
     setItemOffset(newOffset);
   };
   
-
-
-
-
-
-
   return (
     <div className="">
     <div className="flex-col items-end">
@@ -66,16 +63,17 @@ const Product = ({data}) => {
         <button className="p-2 bg-[#EDA415] w-[130px] h-[50px] rounded-2xl text-white text-lg" onClick={openProduct}>
           Add Products  
         </button>
-      </div>
-      <div className={`absolute z-10 left-[800px] `}>
-        {isModal && <Addcategory setIsModal={setIsModal} />}
-      </div>
-      <div className={`absolute z-10 left-[800px] `}>
-        {subcategory && <Addsubcategory />}
-      </div>
-      <div className={`absolute z-[999] left-[800px] `}>
+        <div className={`absolute z-[999] left-[700px] top-0 `}>
         {product && <Addproduct />}
       </div>
+      </div>
+      <div className={`absolute z-10 left-[800px] top-10`}>
+        {isModal && <Addcategory setIsModal={setIsModal} />}
+      </div>
+      <div className={`absolute z-10 left-[800px] top-12 `}>
+        {subcategory && <Addsubcategory />}
+      </div>
+    
 
       <div className="flex gap-x-10 flex-wrap mt-12 mr-12 ">
       {currentItems.map((item, index) => (
@@ -87,12 +85,12 @@ const Product = ({data}) => {
         <img
           src={`http://localhost:4000/images/${item.imagePath}`} onClick={()=>navigate(`/single/${item._id}`)}
           className="w-[150px] h-[120px] object-cover cursor-pointer"
-          alt="laptop"
+          alt="laptop" 
         />
         <ion-icon
-          class="mt-6 text-xl bg-blue-300 rounded-full w-[40px] h-[40px] flex justify-center items-center"
+          class="mt-6 text-xl cursor-pointer bg-blue-300 rounded-full w-[40px] h-[40px] flex justify-center items-center hover:bg-red-400"
           name="heart-outline" 
-        //   onClick={}
+          onClick={(e)=>handleWhishlist(e,item._id)}
         ></ion-icon>
       </div>
 
