@@ -22,8 +22,7 @@ const Whishlist = () => {
           dispatch(fetchProductsSuccess(response.data.data));
         }
       } catch (error) {
-        console.log(error.message);
-      }
+        console.log(error.message);      }
     };
 
     fetchData();
@@ -50,9 +49,9 @@ const Whishlist = () => {
               />
             </div>
             <div className="ml-4">
-              <p>{products ? products.title : ""}</p>
+              <p>{products ? item.title : ""}</p>
               <div className="flex justify-between mt-2">
-                <p className="">$11.70</p>
+                <p className="">{products ? item.price:""}</p>
                 <ion-icon
                   class="border border-black"
                   name="close-outline"

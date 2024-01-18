@@ -9,6 +9,7 @@ import "./product.css";
 import Error from "./Error";
 
 const Product = ({ data }) => {
+
   const [isModal, setIsModal] = useState(false);
   const [subcategory, setSubCategory] = useState(false);
   const [product, setProduct] = useState(false);
@@ -31,6 +32,11 @@ const Product = ({ data }) => {
   const openProduct = () => {
     setProduct(true);
   };
+
+  const firstLogin = JSON.parse(localStorage.getItem('user'));
+  console.log(firstLogin.accesstoken)
+
+
 
   useEffect(() => {
     setPageNumber(Math.ceil(data.length / perPage));

@@ -6,7 +6,13 @@ import {fetchProductsStart,fetchProductsSuccess,fetchProductsFailure} from '../r
 const useWhishlist = () => {
     const [details,setDetails]=useState()
     const [error,setError]=useState()
+    const[whishModal,setWhishModal]=useState(false)
     const dispatch=useDispatch()
+
+    
+    
+
+
 
 
     const handleWhishlist= async (e,id) => {
@@ -20,6 +26,8 @@ const useWhishlist = () => {
           if(response.data.status=="ok"){
             setDetails(response.data.whishlist)
             dispatch(fetchProductsSuccess(response.data.whishlist))
+            setWhishModal(true)
+
           }else{
             setError(response.data.message);
           }
@@ -34,7 +42,7 @@ const useWhishlist = () => {
       }, []);
 
   return {
-   handleWhishlist,details,error
+   handleWhishlist,details,error,whishModal
 }
 }
 

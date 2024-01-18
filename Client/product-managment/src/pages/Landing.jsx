@@ -6,7 +6,7 @@ import useProductfetch from "../hooks/useProductfetch";
 
 
 const Landing = () => {
-  const {  data,  } =
+  const {  data  } =
     useProductfetch();
 
   return (

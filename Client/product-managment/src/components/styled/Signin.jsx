@@ -7,7 +7,7 @@ const Signin = () => {
     const navigate=useNavigate()
     
   useEffect(() => {
-    const userInfo = localStorage.getItem("user");
+    const userInfo = JSON.parse(localStorage.getItem("user"));
     if (userInfo) {
       navigate("/home");
     } else {
